@@ -10,4 +10,11 @@ router.get("/pages", (req, res, next) => {
   .catch(next);
 })
 
+// Add a page url
+router.post('/pages', (req, res, next) => {
+  Page.create(req.body)
+      .then(page => res.json(page))
+      .catch(err => next(err))
+})
+
 module.exports = router;

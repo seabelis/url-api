@@ -3,7 +3,13 @@ const app = express()
 const port = process.env.PORT || 4000
 // const db = require("./db");
 // const Page = require("./page/model")
+const bodyParser = require("body-parser");
+const jsonParser = bodyParser.json()
+app.use(jsonParser)
 const pageRouter = require("./page/router")
+
+
+
 
 
 app
