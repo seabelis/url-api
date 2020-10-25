@@ -8,7 +8,15 @@ router.get("/pages", (req, res, next) => {
     res.send(pages);
   })
   .catch(next);
-})
+});
+
+router.get("/pages/:pageId", (req, res, next) => {
+  Page.findByPk(req.params.pageId)
+    .then(page => {
+      res.send(page);
+    })
+    .catch(next);
+});
 
 // Add a page url
 router.post('/pages', (req, res, next) => {
