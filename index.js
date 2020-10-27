@@ -1,4 +1,6 @@
 const express = require('express')
+
+//middlewares
 const app = express()
 
 // const corsMiddleware = require('cors')
@@ -10,8 +12,8 @@ const port = process.env.PORT || 4000
 // const Page = require("./page/model")
 
 const bodyParser = require("body-parser");
-const jsonParser = bodyParser.json()
-app.use(jsonParser)
+const bodyParserMiddleware = bodyParser.json()
+app.use(bodyParserMiddleware)
 
 const pageRouter = require("./page/router")
 app.use(pageRouter)
