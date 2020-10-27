@@ -1,22 +1,25 @@
 const express = require('express')
 
-//middlewares
-const app = express()
+//Middlewares
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const bodyParserMiddleware = bodyParser.json()
+const corsMiddleware = cors()
 
-// const corsMiddleware = require('cors')
-// app.use(corsMiddleware)
-
-const port = process.env.PORT || 4000
+// Routers
+const pageRouter = require("./page/router")
 
 // const db = require("./db");
 // const Page = require("./page/model")
 
-const bodyParser = require("body-parser");
-const bodyParserMiddleware = bodyParser.json()
-app.use(bodyParserMiddleware)
+// Init
+const app = express()
+const port = process.env.PORT || 4000
 
-const pageRouter = require("./page/router")
-app.use(pageRouter)
-.listen(port, () => {
-  console.log(`App is listening on port ${port}`);
-});
+app
+  .use(corsMiddleware)
+  .use(bodyParserMiddleware)
+  .use(pageRouter)
+  .listen(port, () => {
+    console.log(`App is listening on port ${port}`);
+  });
