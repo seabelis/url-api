@@ -25,4 +25,23 @@ router.post('/pages', (req, res, next) => {
       .catch(err => next(err))
 })
 
+// Change data
+router.put(
+  '/pages/:id',
+  (request, response, next) => Page
+    .findByPk(request.params.id)
+    .then(page => page.update(request.body))
+    .then(page => response.send(page))
+    .catch(next)
+)
+
+// Delete data
+router.delete(
+  '/pages/:id',
+  (request, response, next) => Page
+    .destroy({ where: { id: request.params.id }})
+    .then(number => response.send({ number }))
+    .catch(next)
+)
+
 module.exports = router;
